@@ -3,13 +3,13 @@
 
 #include <tuple>
 #include <vector>
+#include "entity/strategies/physical_entity.h"
 
 // Constrain
 // vitessePersoMax < longeurPersoMin
 
 // dependencies
 class Scene;
-class Entity;
 
 typedef std::pair<unsigned int, unsigned int> Vec;
 typedef std::pair<int, int> Vel;
@@ -19,7 +19,7 @@ typedef std::pair<int, int> Vel;
  */
 void update(Scene);
 
-void updateCinematics(Entity&);
+Vel updateCinematics(PhysicalEntity const);
 void updateCollision(Scene);
 
 class Cinematics {
