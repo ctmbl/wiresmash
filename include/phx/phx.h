@@ -31,6 +31,7 @@ private:
 class Hitbox {
 private:
     std::vector<Vec> m_vertices;
+    int coucou;
 };
 
 class PhysicalParameters {
