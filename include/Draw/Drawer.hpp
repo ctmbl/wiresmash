@@ -1,7 +1,7 @@
 #ifndef DRAWER_HPP
 #define DRAWER_HPP
 
-#include <vector>
+#include <map>
 #include <SFML/Graphics.hpp>
 
 class DrawStrategy;
@@ -9,7 +9,8 @@ class DrawStrategy;
 class Drawer
 {
 private:
-    static std::vector<DrawStrategy*> drawStrategies;
+    static int idGen;
+    static std::map<int, DrawStrategy*> drawStrategies;
 public:
     int static addDrawStrategy(DrawStrategy* drawStrategy);
     void static removeDrawStrategy(int id);

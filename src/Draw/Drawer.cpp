@@ -1,19 +1,21 @@
 #include "Draw/Drawer.hpp"
 #include "Draw/DrawStrategy.hpp"
 
-std::vector<DrawStrategy*> Drawer::drawStrategies = std::vector<DrawStrategy*>();
+std::map<int, DrawStrategy*> Drawer::drawStrategies = std::map<int, DrawStrategy*>();
+int Drawer::idGen = 0;
 
 int Drawer::addDrawStrategy(DrawStrategy* drawStrategy) {
-    drawStrategies.push_back(drawStrategy);
-    return drawStrategies.size()-1;
+    idGen++;
+    drawStrategies.insert({idGen, drawStrategy});
+    return idGen;
 }
 
 void Drawer::removeDrawStrategy(int id) {
-    //TODO
+    drawStrategies.erase(id);
 }
 
 void Drawer::flush(sf::RenderWindow& window) {
-    for (DrawStrategy* drawStrategy : drawStrategies) {
-        drawStrategy->draw(window);
+    for (std::pair<int, DrawStrategy*> element : drawStrategies) {
+        element.second->draw(window);
     }
 }

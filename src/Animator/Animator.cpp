@@ -1,20 +1,22 @@
 #include "Animator/Animator.hpp"
 #include "Animator/AnimationGraph.hpp"
 
-std::vector<AnimationGraph*> Animator::animationGraphs = std::vector<AnimationGraph*>();
+std::map<int, AnimationGraph*> Animator::animationGraphs = std::map<int, AnimationGraph*>();
+int Animator::idGen = 0;
 
 int Animator::addAnimationGraph(AnimationGraph* animationGraph) {
-    animationGraphs.push_back(animationGraph);
-    return animationGraphs.size()-1;
+    idGen++;
+    animationGraphs.insert({idGen, animationGraph});
+    return idGen;
 }
 
 void Animator::removeAnimationGraph(int id) {
-    animationGraphs.erase(animationGraphs.begin() + id);
+    animationGraphs.erase(id);
 }
 
 void Animator::flush() {
-    for (AnimationGraph* animationGraph : animationGraphs) {
-        animationGraph->executeCurrentFrame();
-        animationGraph->goToNextFrame();
+    for (std::pair<int, AnimationGraph*> element : animationGraphs) {
+        element.second->executeCurrentFrame();
+        element.second->goToNextFrame();
     }
 }
