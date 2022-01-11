@@ -3,6 +3,7 @@
 
 #include <tuple>
 #include <vector>
+#include <iostream>
 #include "entity/strategies/physical_entity.h"
 
 // Constrain
@@ -33,9 +34,6 @@ private:
     std::vector<Vec> m_vertices;
 };
 
-class PhysicalParameters {
-private:
-    std::vector<int> m_parameters;
-};
+enum Strength {weight};
 
 #endif
