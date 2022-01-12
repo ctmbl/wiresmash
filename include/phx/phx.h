@@ -34,6 +34,6 @@ private:
     std::vector<Vec> m_vertices;
 };
 
-enum Strength {weight};
+enum Force {weight};
 
 #endif
