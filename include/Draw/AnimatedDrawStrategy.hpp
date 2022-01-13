@@ -14,7 +14,11 @@ private:
 
 public:
     AnimatedDrawStrategy(std::string imageFile, int height, int width, int nbLines);
+    AnimatedDrawStrategy(std::string imageFile, int height, int width, int nbLines, int paralaxFactor);
+    AnimatedDrawStrategy(std::string imageFile, int height, int width, int nbLines, int paralaxFactor, int priorityScore);
     AnimatedDrawStrategy(std::string imageFile, sf::Vector2f imagePosition, int height, int width, int nbLines);
+    AnimatedDrawStrategy(std::string imageFile, sf::Vector2f imagePosition, int height, int width, int nbLines, int paralaxFactor);
+    AnimatedDrawStrategy(std::string imageFile, sf::Vector2f imagePosition, int height, int width, int nbLines, int paralaxFactor, int priorityScore);
     ~AnimatedDrawStrategy();
 
     void goToImage(int line, int frame);

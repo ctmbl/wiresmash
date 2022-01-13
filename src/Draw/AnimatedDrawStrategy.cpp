@@ -5,8 +5,28 @@ DrawStrategy(imageFile), height(height), width(width), nbLines(nbLines), current
     this->sprite.setTextureRect(sf::IntRect(0, 0, width, height));
 }
 
+AnimatedDrawStrategy::AnimatedDrawStrategy(std::string imageFile, int height, int width, int nbLines, int paralaxFactor) :
+DrawStrategy(imageFile, paralaxFactor), height(height), width(width), nbLines(nbLines), currentFrame(0), currentLine(0) {
+    this->sprite.setTextureRect(sf::IntRect(0, 0, width, height));
+}
+
+AnimatedDrawStrategy::AnimatedDrawStrategy(std::string imageFile, int height, int width, int nbLines, int paralaxFactor, int priorityScore) :
+DrawStrategy(imageFile, paralaxFactor, priorityScore), height(height), width(width), nbLines(nbLines), currentFrame(0), currentLine(0) {
+    this->sprite.setTextureRect(sf::IntRect(0, 0, width, height));
+}
+
 AnimatedDrawStrategy::AnimatedDrawStrategy(std::string imageFile, sf::Vector2f imagePosition, int height, int width, int nbLines) :
 DrawStrategy(imageFile, imagePosition), height(height), width(width), nbLines(nbLines), currentFrame(0), currentLine(0) {
+    this->sprite.setTextureRect(sf::IntRect(0, 0, width, height));
+}
+
+AnimatedDrawStrategy::AnimatedDrawStrategy(std::string imageFile, sf::Vector2f imagePosition, int height, int width, int nbLines, int paralaxFactor) :
+DrawStrategy(imageFile, imagePosition, paralaxFactor), height(height), width(width), nbLines(nbLines), currentFrame(0), currentLine(0) {
+    this->sprite.setTextureRect(sf::IntRect(0, 0, width, height));
+}
+
+AnimatedDrawStrategy::AnimatedDrawStrategy(std::string imageFile, sf::Vector2f imagePosition, int height, int width, int nbLines, int paralaxFactor, int priorityScore) :
+DrawStrategy(imageFile, imagePosition, paralaxFactor, priorityScore), height(height), width(width), nbLines(nbLines), currentFrame(0), currentLine(0) {
     this->sprite.setTextureRect(sf::IntRect(0, 0, width, height));
 }
 
