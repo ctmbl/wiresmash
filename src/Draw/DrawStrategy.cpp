@@ -9,7 +9,7 @@ DrawStrategy::DrawStrategy(std::string imageFile) {
 
     this->sprite = sf::Sprite();
     this->sprite.setTexture(this->texture);
-    this->paralaxFactor = 10;
+    this->paralaxFactor = Drawer::FOREGROUND_PARALAX_PLANE;
     this->priorityScore = 0;
 
     this->associatedId = Drawer::addDrawStrategy(this);
@@ -52,7 +52,7 @@ DrawStrategy::DrawStrategy(std::string imageFile, sf::Vector2f imagePosition) {
     this->sprite = sf::Sprite();
     this->sprite.setTexture(this->texture);
     this->sprite.setPosition(imagePosition);
-    this->paralaxFactor = 10;
+    this->paralaxFactor = Drawer::FOREGROUND_PARALAX_PLANE;
     this->priorityScore = 0;
 
     this->associatedId = Drawer::addDrawStrategy(this);

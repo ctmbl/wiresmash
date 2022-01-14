@@ -1,21 +1,21 @@
 #include "Animator/Animator.hpp"
-#include "Animator/AnimationGraph.hpp"
+#include "Animator/AnimationStrategy.hpp"
 
-std::map<int, AnimationGraph*> Animator::animationGraphs = std::map<int, AnimationGraph*>();
+std::map<int, AnimationStrategy*> Animator::animationStrategies = std::map<int, AnimationStrategy*>();
 int Animator::idGen = 0;
 
-int Animator::addAnimationGraph(AnimationGraph* animationGraph) {
+int Animator::addAnimationStrategy(AnimationStrategy* animationStrategy) {
     idGen++;
-    animationGraphs.insert({idGen, animationGraph});
+    animationStrategies.insert({idGen, animationStrategy});
     return idGen;
 }
 
-void Animator::removeAnimationGraph(int id) {
-    animationGraphs.erase(id);
+void Animator::removeAnimationStrategy(int id) {
+    animationStrategies.erase(id);
 }
 
 void Animator::flush() {
-    for (std::pair<int, AnimationGraph*> element : animationGraphs) {
+    for (std::pair<int, AnimationStrategy*> element : animationStrategies) {
         element.second->executeCurrentFrame();
         element.second->goToNextFrame();
     }

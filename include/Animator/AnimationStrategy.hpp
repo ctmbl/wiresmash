@@ -1,5 +1,5 @@
-#ifndef ANIMATION_GRAPH_HPP
-#define ANIMATION_GRAPH_HPP
+#ifndef ANIMATION_STRATEGY_HPP
+#define ANIMATION_STRATEGY_HPP
 
 #include <vector>
 #include <iostream>
@@ -7,7 +7,7 @@
 
 class Animator;
 
-class AnimationGraph
+class AnimationStrategy
 {
 private:
     /**
@@ -27,8 +27,8 @@ public:
     /*****************************************************************************************************
      *        CONSTRUCTEURS ET DESTRUCTEURS
      *****************************************************************************************************/
-    AnimationGraph(Animation* const startingPoint);
-    ~AnimationGraph();
+    AnimationStrategy(Animation* const startingPoint);
+    ~AnimationStrategy();
 
     /*****************************************************************************************************
      *        ACCESSEURS
@@ -41,7 +41,7 @@ public:
 
     /**
      * @brief Calcule et modifie les attributs currentAnimation et currentFrame selon les transitions déclenchées,
-     * si l'animationest terminée ou non.
+     * si l'animation est terminée ou non.
      */
     void goToNextFrame();
     /**

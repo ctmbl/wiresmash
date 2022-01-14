@@ -63,16 +63,16 @@ int Controller::nbHeldFrames(Player player, Button button) {
     return nbFrames[(int)player][(int)button];
 }
 
-sf::Vector2f* Controller::stickRawPosition(Player player, Stick stick) {
+sf::Vector2f Controller::stickRawPosition(Player player, Stick stick) {
     float x = sf::Joystick::getAxisPosition((int)player, associatedSFMLAxis(stick, Axis::X));
     float y = sf::Joystick::getAxisPosition((int)player, associatedSFMLAxis(stick, Axis::Y));
-    return new sf::Vector2f(x,y);
+    return sf::Vector2f(x,y);
 }
 
 bool Controller::isOutOfRadialDeadZone(Player player, Stick stick) {
     // On calcule la norme au carré de la position du stick
-    sf::Vector2f* rawPosition = stickRawPosition(player, stick);
-    float rawPositionMagniude2 = rawPosition->x * rawPosition->x + rawPosition->y * rawPosition->y;
+    sf::Vector2f rawPosition = stickRawPosition(player, stick);
+    float rawPositionMagniude2 = rawPosition.x * rawPosition.x + rawPosition.y * rawPosition.y;
 
     // On récupère le seuil de détectabilité du bon stick (au carré)
     float deadZone2 = 0;
@@ -81,32 +81,31 @@ bool Controller::isOutOfRadialDeadZone(Player player, Stick stick) {
     if (stick == Stick::DPad) {deadZone2 = DPAD_RADIAL_DEAD_ZONE * DPAD_RADIAL_DEAD_ZONE;}
 
     // On renvoie le résultat
-    delete rawPosition;
     return (rawPositionMagniude2 > deadZone2);
 }
 
-sf::Vector2f* Controller::stickPosition(Player player, Stick stick) {
+sf::Vector2f Controller::stickPosition(Player player, Stick stick) {
     if (isOutOfRadialDeadZone(player, stick)) {
         return stickRawPosition(player, stick);
     } else {
-        return new sf::Vector2f(0,0);
+        return sf::Vector2f(0,0);
     }
 }
 
 float Controller::stickAngle(Player player, Stick stick) {
     if (isOutOfRadialDeadZone(player, stick)) {
 
-        sf::Vector2f* position = stickPosition(player, stick);
+        sf::Vector2f position = stickPosition(player, stick);
 
         // On effectue un produit scalaire avec le vecteur (1,0), puis on norme pour obtenir le cos de l'angle
-        float cosAngle = position->x / (std::sqrt(position->x * position->x + position->y * position->y));
+        float cosAngle = position.x / (std::sqrt(position.x * position.x + position.y * position.y));
 
         // On calcule l'angle, en degré
         float angle = std::acos(cosAngle) * 180 / 3.14159;
 
         // Si on est au-dessus de l'équateur, on renvoie une valeur de [0,179]
         // Sinon, on renvoie une valeur de [180,359]
-        if (position->y < 0) {
+        if (position.y < 0) {
             return angle;
         } else {
             return 360 - angle;

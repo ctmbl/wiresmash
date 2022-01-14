@@ -1,19 +1,19 @@
-#include "Animator/AnimationGraph.hpp"
+#include "Animator/AnimationStrategy.hpp"
 #include "Animator/Animator.hpp"
 
-AnimationGraph::AnimationGraph(Animation* const startingPoint) {
+AnimationStrategy::AnimationStrategy(Animation* const startingPoint) {
     this->currentAnimation = startingPoint;
     this->currentFrame = 0;
-    this->associatedId = Animator::addAnimationGraph(this);
+    this->associatedId = Animator::addAnimationStrategy(this);
 }
 
-AnimationGraph::~AnimationGraph() {
-    //TODO : La suppression du tableau de Animator
+AnimationStrategy::~AnimationStrategy() {
+    Animator::removeAnimationStrategy(associatedId);
 }
 
-int AnimationGraph::getAssociatedId() {return associatedId;}
+int AnimationStrategy::getAssociatedId() {return associatedId;}
 
-void AnimationGraph::goToNextFrame() {
+void AnimationStrategy::goToNextFrame() {
     // Si une transition est déclenchée, on va au début de l'animation correspondante
     for (Transition* transition : currentAnimation->getTransitions()) {
         if (transition->isTriggered(currentFrame)) {
@@ -34,6 +34,6 @@ void AnimationGraph::goToNextFrame() {
     currentFrame++;
 }
 
-void AnimationGraph::executeCurrentFrame() {
+void AnimationStrategy::executeCurrentFrame() {
     currentAnimation->action(currentFrame);
 }
