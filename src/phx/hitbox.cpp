@@ -1,5 +1,7 @@
 #include "./../../include/phx/hitbox.h"
 
+//----------------------------Creation de Hitbox----------------------------// (ETT conventions)
+
 // size default value is 2
 Hitbox::Hitbox(unsigned int size){
     s = size;
@@ -19,4 +21,17 @@ void Hitbox::setPoint(unsigned int i, unsigned int x, unsigned int y){
     } else {
         br = {x, -1-y};
     }
+}
+
+//----------------------------Obtention de Hitbox----------------------------// (phx conventions)
+
+unsigned int Hitbox::size(){
+    return s;
+}
+
+std::vector<std::pair<unsigned int, unsigned int>> Hitbox::getHitbox(){
+    std::vector<std::pair<unsigned int, unsigned int>> H;
+    H.push_back( std::make_pair(std::get<0>(tl), std::get<1>(br)) );
+    H.push_back( std::make_pair(std::get<0>(br), std::get<1>(tl)) );
+    return H;
 }
