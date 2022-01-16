@@ -1,6 +1,8 @@
 #ifndef HITBOX_H
 #define HITBOX_H
 #include <tuple>
+#include <vector>
+#include <utility>
 
 //###################################Classe Hitbox###################################//
 
@@ -34,7 +36,11 @@ class Hitbox{
     //----------------------------Obtention de Hitbox----------------------------// (phx conventions)
 
 
+    // get the size of the Hitbox
+    unsigned int size();
 
+    // return the Hitbox as a vector of points {x, y} (given points are Bottom Left and Top Right)
+    std::vector<std::pair<unsigned int, unsigned int>> getHitbox();
 };
 
 #endif
