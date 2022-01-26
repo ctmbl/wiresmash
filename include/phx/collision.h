@@ -4,32 +4,11 @@
 // dependencies
 #include <tuple>
 #include <vector>
+#include "entity/entity.h"
+#include "entity/strategies/physical_entity.h"
+#include "phx/hitbox.h"
 
-/**
- * TEMPORARY STARTS HERE 
- * 
- */
-class Hitbox
-{
-private:
-    unsigned int x;
-    unsigned int y;
-    unsigned int length;
-    unsigned int height;
 
-public:
-    Hitbox() = default;
-    Hitbox(unsigned int x, unsigned int y, unsigned int length, unsigned int height);
-    unsigned int getX();
-    unsigned int getY();
-    unsigned int getL();
-    unsigned int getH();
-};
-class Entity{
-public:
-    Hitbox hbx;
-    Entity(Hitbox hbx);
-};
 struct Collider
 {
     Entity* ettColliding;

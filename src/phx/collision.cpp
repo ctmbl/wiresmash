@@ -1,38 +1,14 @@
 #include "phx/collision.h"
-#include <cstdio>
 using namespace std;
 
-Hitbox::Hitbox(unsigned int x, unsigned int y, unsigned int length, unsigned int height){
-    this->x = x;
-    this->y = y;
-    this->length = length;
-    this->height = height;
-}
-unsigned int Hitbox::getX(){
-    return this->x;
-}
-unsigned int Hitbox::getY(){
-    return this->y;
-}
-unsigned int Hitbox::getL(){
-    return this->length;
-}
-unsigned int Hitbox::getH(){
-    return this->length;
-}
-
-Entity::Entity(Hitbox hbx){
-    this->hbx = hbx;
-}
-
-pair<int, int> checkCollisionEntities(Entity ett1, Entity ett2){
-    Hitbox bx = ett1.hbx;
+pair<int, int> checkCollisionEntities(Entity* ett1, Entity* ett2){
+    Hitbox hbx = ((PhysicalEntity*)(ett1->getStrategy(Entity::PHYSICAL)))->getHitbox();
     unsigned int minx1 = bx.getX();
     unsigned int maxx1 = minx1 + bx.getL();
     unsigned int miny1 = bx.getY();
     unsigned int maxy1 = miny1 + bx.getH();
 
-    bx = ett2.hbx;
+    bx = ett2->hbx;
     unsigned int minx2 = bx.getX();
     unsigned int maxx2 = minx2 + bx.getL();
     unsigned int miny2 = bx.getY();
@@ -51,7 +27,7 @@ pair<int, int> checkCollisionEntities(Entity ett1, Entity ett2){
     return make_pair(xcol, ycol);
 }
 
-vector<Collider> checkCollision(std::vector<Entity> collEtt){
+vector<Collider> checkCollision(std::vector<Entity*> collEtt){
     int nbEtt = collEtt.size();
     pair<int, int> colVect;
     Collider collider;

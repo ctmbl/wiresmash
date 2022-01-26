@@ -1,4 +1,4 @@
-#include "./../../include/phx/hitbox.h"
+#include "phx/hitbox.h"
 
 //----------------------------Creation de Hitbox----------------------------// (ETT conventions)
 
@@ -31,7 +31,7 @@ unsigned int Hitbox::size(){
 
 std::vector<std::pair<unsigned int, unsigned int>> Hitbox::getHitbox(){
     std::vector<std::pair<unsigned int, unsigned int>> H;
-    H.push_back( std::make_pair(std::get<0>(tl), std::get<1>(br)) );
-    H.push_back( std::make_pair(std::get<0>(br), std::get<1>(tl)) );
+    H.push_back( std::make_pair(tl.first, br.second) );
+    H.push_back( std::make_pair(br.first, tl.second) );
     return H;
 }
